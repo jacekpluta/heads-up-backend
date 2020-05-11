@@ -17,6 +17,20 @@ exports.createCategory = function (req, res, next) {
     errors.push("Please fill in all fields");
   }
 
+  if (name.length > 40) {
+    errors.push("Name of the category should have maximum 40 characters");
+  }
+
+  if (name.length <= 1) {
+    errors.push("Name of the category should have minimum 2 characters");
+  }
+
+  if (name.length > 30) {
+    errors.push(
+      "Description of the category should have maximum 30 characters"
+    );
+  }
+
   if (!validator.validate(email)) {
     errors.push("Enter correct email address");
   }
