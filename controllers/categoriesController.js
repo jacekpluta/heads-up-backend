@@ -1,4 +1,4 @@
-const categories = require("../models/rategoryDAO");
+const categories = require("../models/categoryDAO");
 const validator = require("email-validator");
 
 exports.createCategory = function (req, res, next) {
