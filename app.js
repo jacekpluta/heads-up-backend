@@ -16,7 +16,7 @@ const router = express.Router();
 require("./config/passport")(passport);
 
 //express session
-app.use(session({ secret: "secret", resave: true, saveUnintialized: true }));
+app.use(session({ secret: "SECRET", resave: true, saveUnintialized: true }));
 
 //passport middleware
 app.use(passport.initialize());
@@ -44,6 +44,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cors());
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 
 //router middleware
 app.use("/", indexRouter);

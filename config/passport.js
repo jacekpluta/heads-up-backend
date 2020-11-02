@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 
 //User model
 const User = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
 module.exports = function (passport) {
   passport.use(
@@ -13,6 +14,11 @@ module.exports = function (passport) {
             bcrypt.compare(password, user.password, (err, isMatch) => {
               if (err) throw err;
 
+              const token = jwt.sign(
+                { userId: user.email },
+                process.env.SECRET
+              );
+              console.log(token);
               if (isMatch) {
                 return done(null, user);
               } else {
